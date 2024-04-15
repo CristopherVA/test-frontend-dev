@@ -43,6 +43,7 @@ export const getUsers = async (token: string) => {
                 Authorization: `Bearer ${token}`
             }
         })
+        
         return data;
     } catch (error: Error | AxiosError | any) {
         console.log("ERROR LOGIN", error)

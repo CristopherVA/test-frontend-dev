@@ -28,7 +28,6 @@ const UsersPage = () => {
 
     }, [session?.token])
 
-
     return (
         <div className='w-full grid place-content-center'>
             <UserTable dataUser={userData || []} />
