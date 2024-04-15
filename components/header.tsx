@@ -1,22 +1,23 @@
 "use client"
 import React from 'react'
 import Link from 'next/link'
-import useValidateToken from '@/hooks/useValidateToken'
-import { useRouter } from 'next/navigation'
+import { redirect, useRouter } from 'next/navigation'
+import { getSession } from '@/lib/session'
 
 
 const Header = () => {
     const router = useRouter();
-    const session = useValidateToken();
+    const session = getSession();
 
     const handleLogout = () => {
         sessionStorage.removeItem("session");
+        router.push("/")
         router.refresh();
     }
 
     return (
-        <div className='bg-blue-500 text-white sticky top-0 flex justify-between px-4 py-4'>
-            <p className='font-extrabold text-xl'>TF</p >
+        <div className='bg-black text-white sticky top-0 flex justify-between px-4 py-4'>
+            <Link href="/" className='font-extrabold text-xl'>TF</Link >
 
             <div className='space-x-3'>
                 <Link href="/users" className='text-md font-bold'>List User</Link>

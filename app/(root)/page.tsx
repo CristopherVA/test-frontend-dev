@@ -1,6 +1,6 @@
 "use client"
 
-export default async function Home() {
+export default function Home() {
 
   return (
     <main className="grid place-content-center h-5/6 p-24 font-extrabold ">

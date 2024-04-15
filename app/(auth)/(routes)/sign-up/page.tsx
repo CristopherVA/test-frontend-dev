@@ -6,7 +6,7 @@ import toast from 'react-hot-toast';
 import { RegisterInterface } from '@/interface';
 import { registerUser } from '@/lib/request';
 import { redirect, useRouter } from 'next/navigation';
-import useValidateToken from '@/hooks/useValidateToken';
+import { addSession, getSession } from '@/lib/session';
 
 
 
@@ -28,9 +28,7 @@ const SignInPage = () => {
     })
 
     const router = useRouter();
-    const session = useValidateToken();
-    console.log({ session })
-
+    const session = getSession();
 
     const onSubmit: SubmitHandler<RegisterInterface> = async (data) => {
         try {
@@ -45,9 +43,12 @@ const SignInPage = () => {
                 return;
             }
 
-            sessionStorage.setItem("session", JSON.stringify(resp))
-            router.push('/')
+            addSession(resp.session)
+
+            toast.success("Sign In sucessfuly")
+
             reset()
+            redirect("/users")
 
         } catch (error) {
             console.error({ error })
@@ -65,7 +66,7 @@ const SignInPage = () => {
                         <label>First Name</label>
                         <input
                             type="text"
-                            className='bg-white text-black w-full py-2 px-4 rounded-md'
+                            className='bg-white border border-black text-black w-full py-2 px-4 rounded-md'
                             placeholder='Type email'
                             {...register("firstname", { required: true, maxLength: 30 })}
                         />
@@ -78,7 +79,7 @@ const SignInPage = () => {
                         <label>Last Name</label>
                         <input
                             type="text"
-                            className='bg-white text-black w-full py-2 px-4 rounded-md'
+                            className='bg-white border border-black text-black w-full py-2 px-4 rounded-md'
                             placeholder='Type password'
                             {...register("lastname", { required: true })}
                         />
@@ -91,7 +92,7 @@ const SignInPage = () => {
                         <label>Email</label>
                         <input
                             type="email"
-                            className='bg-white text-black w-full py-2 px-4 rounded-md'
+                            className='bg-white border border-black text-black w-full py-2 px-4 rounded-md'
                             placeholder='Type password'
                             {...register("email", { required: true })}
                         />
@@ -104,7 +105,7 @@ const SignInPage = () => {
                         <input
 
                             type="password"
-                            className='bg-white text-black w-full py-2 px-4 rounded-md'
+                            className='bg-white border border-black text-black w-full py-2 px-4 rounded-md'
                             placeholder='Type password'
                             {...register("password", { required: true, min: 8 })}
                         />
@@ -120,7 +121,7 @@ const SignInPage = () => {
                         <label>Confirm Password</label>
                         <input
                             type="password"
-                            className='bg-white text-black w-full py-2 px-4 rounded-md'
+                            className='bg-white border border-black text-black w-full py-2 px-4 rounded-md'
                             placeholder='Type password'
                             {...register("confirmPassword", { required: true, min: 8 })}
                         />
@@ -136,7 +137,7 @@ const SignInPage = () => {
                         <label>Company</label>
                         <input
                             type="text"
-                            className='bg-white text-black w-full py-2 px-4 rounded-md'
+                            className='bg-white border border-black text-black w-full py-2 px-4 rounded-md'
                             placeholder='Type password'
                             {...register("company", { required: true, maxLength: 30 })}
                         />
@@ -148,7 +149,7 @@ const SignInPage = () => {
 
                 <button
                     type='submit'
-                    className='mt-2 px-4 py-2 w-full bg-blue-500 rounded-md text-lg font-bold'
+                    className='mt-2 px-4 py-2 w-full text-white bg-black hover:hover:bg-black/45 ease-in duration-150 transition-all disabled:hover:bg-black/45 rounded-md text-lg font-bold'
                 >
                     Register
                 </button>

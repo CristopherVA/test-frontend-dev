@@ -34,7 +34,7 @@ export const signIn = async (data: LoginInterface) => {
 }
 
 export const getUsers = async (token: string) => {
-    console.log({ token })
+    if (!token) return
     try {
         const { data } = await axios.get(`${BASE_URL}/users`, {
             headers: {
