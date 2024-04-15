@@ -26,7 +26,7 @@ const UsersPage = () => {
                 }
             })
 
-    }, [session.token])
+    }, [session?.token])
 
 
     return (
