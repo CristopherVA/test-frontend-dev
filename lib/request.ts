@@ -1,7 +1,9 @@
 "use server"
-import axios, { AxiosError, AxiosResponseTransformer } from "axios";
+import axios, { AxiosError } from "axios";
 import { BASE_URL } from "@/config";
 import { LoginInterface, RegisterInterface } from "@/interface";
+
+console.log(BASE_URL)
 
 export const registerUser = async (data: RegisterInterface) => {
     try {
@@ -29,7 +31,7 @@ export const signIn = async (data: LoginInterface) => {
         return resp;
     } catch (error: Error | AxiosError | any) {
         console.log("ERROR LOGIN", error)
-        return error?.response?.data
+        return error
     }
 }
 

@@ -5,6 +5,6 @@ export const addSession = (session: SessionInterface) => {
 }
 
 export const getSession = () => {
-    const session: SessionInterface = JSON?.parse(sessionStorage.getItem("session") || "{}")
+    const session: SessionInterface = JSON?.parse(sessionStorage.getItem("session" || "") || "{}")
     return session
 }

@@ -36,7 +36,8 @@ const SignInPage = () => {
                 return;
             }
 
-            addSession(resp)
+           
+            addSession(resp || "{}")
 
             toast.success("Sign In sucessfuly")
 
